@@ -1,0 +1,3 @@
+*.o
+*.nes
+hello_world.s
