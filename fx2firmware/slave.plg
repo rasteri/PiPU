@@ -1,0 +1,32 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\user\Google Drive\nes 2019\FX2LP firmware\slave.uvproj
+Project File Date:  <unknown>
+
+<h2>Output:</h2>
+Build target 'Target 1'
+linking...
+BL51 BANKED LINKER/LOCATER V5.03 - SN: Eval Version
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+"FW.obj",
+"DSCR.obj",
+"slave.obj",
+".\EZUSB.LIB",
+".\USBJmpTb.OBJ",
+"isr.obj" 
+TO "slave" 
+RAMSIZE(256) 
+CODE( 0x0300 )
+XDATA( 0x1A00 )
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 091BH BYTE (113%) *
+******************************************************************************
+Program Size: data=50.5 xdata=4473 code=2715
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
+*** FATAL ERROR L250: CODE SIZE LIMIT IN RESTRICTED VERSION EXCEEDED
+    MODULE:  C:\KEIL\C51\LIB\C51S.LIB (-----)
+    LIMIT:   0800H BYTES
+Target not created
