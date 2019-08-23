@@ -267,7 +267,8 @@ int FindBestPalForSlice(char *bmp, unsigned int xoff, unsigned int yoff)
 	for (x = xoff; x < xoff + 8; x += 1)
 	{
 		getpixel(bmp, x, y, &currPix.r, &currPix.g, &currPix.b);
-		bestPal = FindBestPalForPixel(currPix);
+		//bestPal = FindBestPalForPixel(currPix);
+		bestPal = PaletteLookup[currPix.r][currPix.g][currPix.b];
 
 		if (bestPal != -1)
 		{
@@ -465,7 +466,7 @@ void FitFrame(char *bmp, PPUFrame *theFrame, int startline, int endline)
 		{
 			getpixel(bmp, x, y, &currPix.r, &currPix.g, &currPix.b);
 
-			//bump up brightness
+/*			//bump up brightness
 			currPix.r = SatAdd8(currPix.r, BRIGHTNESS);
 			currPix.g = SatAdd8(currPix.g, BRIGHTNESS);
 			currPix.b = SatAdd8(currPix.b, BRIGHTNESS);
@@ -474,7 +475,7 @@ void FitFrame(char *bmp, PPUFrame *theFrame, int startline, int endline)
 			currPix.r = SatAdd8(contrastFactor * ((double)currPix.r - 128), 128);
 			currPix.g = SatAdd8(contrastFactor * ((double)currPix.g - 128), 128);
 			currPix.b = SatAdd8(contrastFactor * ((double)currPix.b - 128), 128);
-
+*/
 			// Ordered Dither
 			currPix.r = SatAdd8(currPix.r, map[x % 8][y % 8]);
 			currPix.g = SatAdd8(currPix.g, map[x % 8][y % 8]);
@@ -515,8 +516,8 @@ void FitFrame(char *bmp, PPUFrame *theFrame, int startline, int endline)
 				getpixel(bmp, x, y, &currPix.r, &currPix.g, &currPix.b);
 
 				// find closest color match from palette we chose
-				//bestcol = FindBestColorMatchFromPalette(currPix, pmdata->Palettes[palToUse], BgColor); // Slow but dynamic palette
-				bestcol = ColorLookup[currPix.r][currPix.g][currPix.b][palToUse]; // Quick but locked to one palette
+				bestcol = FindBestColorMatchFromPalette(currPix, pmdata->Palettes[palToUse], BgColor); // Slow but dynamic palette
+				//bestcol = ColorLookup[currPix.r][currPix.g][currPix.b][palToUse]; // Quick but locked to one palette
 
 				// Shift the index up one, so -1 becomes zero, which is how it will appear in the nes palette
 				bestcol++;
