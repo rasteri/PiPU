@@ -1,4 +1,5 @@
-CC=gcc
+#CC=gcc
+CC=/root/buildroot-pipu/buildroot-2019.02.4/output/host/usr/bin/arm-linux-gcc
 CFLAGS=-O3 -Wall
 
 pipu: main.o frameprocess.o ppusquirt.o palmus.o

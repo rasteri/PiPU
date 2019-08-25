@@ -19,8 +19,8 @@ int BgColor = 0x0f;
 Color NesPalette[NESCOLORCOUNT];
 
 struct palmusdata *pmdata;
-double contrastFactor, contrast = 50;
-#define BRIGHTNESS 30
+double contrastFactor, contrast = 0;
+#define BRIGHTNESS 0
 Colmatch MostCommonColorInFrame[NESCOLORCOUNT];
 
 // Massive pre-calculated color lookup tables - Baseline FPS 82
@@ -105,6 +105,7 @@ char NesPaletteStrings[NESCOLORCOUNT][6] =
 		"F8D8F8",
 		"000000",
 		"000000"};
+		
 
 // Square a number
 float S(float i)
@@ -133,13 +134,13 @@ void setpixel(char *frameBuf, unsigned int x, unsigned int y, unsigned char r, u
 	*(frameBuf + off + 2) = r;
 }
 
-long ColorDistance(Color color1, Color color2)
+/*long ColorDistance(Color color1, Color color2)
 {
 	return (
 		S((signed int)color1.r - (signed int)color2.r) +
 		S((signed int)color1.g - (signed int)color2.g) +
 		S((signed int)color1.b - (signed int)color2.b));
-}
+}*/
 
 // Compare the difference of two RGB values, weigh by CCIR 601 luminosity
 float WeightedColorDistance(Color color1, Color color2)
@@ -308,10 +309,20 @@ void GFXSetup()
 	char curHex[3] = {0x00, 0x00, 0x00};
 	char *curCol;
 	char *dummy = 0;
+	FILE *fp;
+	size_t n;
+
+	// build palette lookup tables to trade memory for speed
+	// Try to open them from last time if possible
+	if (fp = fopen("ntscpalette.pal", "r"))
+	{
+		if ((n = fread(&NesPalette, 1, 64*3, fp)) != (64*3)){ printf("exit : %lu\n", n); exit(1); }
+		fclose(fp);
+	}
 
 
 	// Generate NES palette from the string info
-	for (i = 0; i < 64; i++)
+	/*for (i = 0; i < 64; i++)
 	{
 		curCol = NesPaletteStrings[i];
 
@@ -326,14 +337,14 @@ void GFXSetup()
 		curHex[0] = curCol[4];
 		curHex[1] = curCol[5];
 		NesPalette[i].b = (unsigned char)strtoul(curHex, &dummy, 16);
-	}
+	}*/
 
 	// Generate ordered dither map
 	for (i = 0; i < 8; i++)
 	{
 		for (j = 0; j < 8; j++)
 		{
-			map[i][j] = (double)80 * (((double)map[i][j] / (double)64) - 0.5);
+			map[i][j] = (double)60 * (((double)map[i][j] / (double)64) - 0.5);
 		}
 	}
 
@@ -376,13 +387,108 @@ void GFXSetup()
 	pmdata->Palettes[3][1] = 0x16;
 	pmdata->Palettes[3][2] = 0x3d;
 
+	//Low Intensity RGB
+	/*pmdata->Palettes[0][0] = 0x16;
+	pmdata->Palettes[0][1] = 0x19;
+	pmdata->Palettes[0][2] = 0x11;
+
+	//Med Intensity RGB
+	pmdata->Palettes[1][0] = 0x26;
+	pmdata->Palettes[1][1] = 0x29;
+	pmdata->Palettes[1][2] = 0x21;
+
+	//High Intensity RGB
+	pmdata->Palettes[2][0] = 0x36;
+	pmdata->Palettes[2][1] = 0x39;
+	pmdata->Palettes[2][2] = 0x31;
+
+	//greys and white
+	pmdata->Palettes[3][0] = 0x2D;
+	pmdata->Palettes[3][1] = 0x3D;
+	pmdata->Palettes[3][2] = 0x20;*/
+
+	//R
+	/*pmdata->Palettes[0][0] = 0x06;
+	pmdata->Palettes[0][1] = 0x16;
+	pmdata->Palettes[0][2] = 0x26;
+
+	//G
+	pmdata->Palettes[1][0] = 0x09;
+	pmdata->Palettes[1][1] = 0x19;
+	pmdata->Palettes[1][2] = 0x29;
+
+	//B
+	pmdata->Palettes[2][0] = 0x01;
+	pmdata->Palettes[2][1] = 0x11;
+	pmdata->Palettes[2][2] = 0x21;
+
+	//greys and white
+	pmdata->Palettes[3][0] = 0x2D;
+	pmdata->Palettes[3][1] = 0x3D;
+	pmdata->Palettes[3][2] = 0x20;*/
+
+	//R + white
+	/*pmdata->Palettes[0][0] = 0x06;
+	pmdata->Palettes[0][1] = 0x16;
+	pmdata->Palettes[0][2] = 0x36;
+
+	//G + white
+	pmdata->Palettes[1][0] = 0x0a;
+	pmdata->Palettes[1][1] = 0x1a;
+	pmdata->Palettes[1][2] = 0x3a;
+
+	//B + white
+	pmdata->Palettes[2][0] = 0x01;
+	pmdata->Palettes[2][1] = 0x11;
+	pmdata->Palettes[2][2] = 0x31;
+
+	//greys and white
+	pmdata->Palettes[3][0] = 0x2D;
+	pmdata->Palettes[3][1] = 0x3D;
+	pmdata->Palettes[3][2] = 0x20;*/
+
+	//RGW
+	/*pmdata->Palettes[0][0] = 0x16;
+	pmdata->Palettes[0][1] = 0x19;
+	pmdata->Palettes[0][2] = 0x20;
+
+	//GBW
+	pmdata->Palettes[1][0] = 0x19;
+	pmdata->Palettes[1][1] = 0x11;
+	pmdata->Palettes[1][2] = 0x20;
+
+	//RBW
+	pmdata->Palettes[2][0] = 0x16;
+	pmdata->Palettes[2][1] = 0x11;
+	pmdata->Palettes[2][2] = 0x20;
+
+	//greys and white
+	pmdata->Palettes[3][0] = 0x2D;
+	pmdata->Palettes[3][1] = 0x3D;
+	pmdata->Palettes[3][2] = 0x20;*/
+
+	//black for bg
+	/*BgColor = 0x0f;
+
+	pmdata->Palettes[0][0] = 0x02;
+	pmdata->Palettes[0][1] = 0x22;
+	pmdata->Palettes[0][2] = 0x24;
+	pmdata->Palettes[1][0] = 0x14;
+	pmdata->Palettes[1][1] = 0x16;
+	pmdata->Palettes[1][2] = 0x26;
+	pmdata->Palettes[2][0] = 0x28;
+	pmdata->Palettes[2][1] = 0x18;
+	pmdata->Palettes[2][2] = 0x1a;
+	pmdata->Palettes[3][0] = 0x2a;
+	pmdata->Palettes[3][1] = 0x2c;
+	pmdata->Palettes[3][2] = 0x1c;*/
+
 	// Pre-gen contrast factor
 	contrastFactor = (259 * (contrast + 255)) / (255 * (259 - contrast));
 
 	Color col;
 
-	FILE *fp;
-	size_t n;
+
 
 	// build palette lookup tables to trade memory for speed
 	// Try to open them from last time if possible
@@ -466,7 +572,7 @@ void FitFrame(char *bmp, PPUFrame *theFrame, int startline, int endline)
 		{
 			getpixel(bmp, x, y, &currPix.r, &currPix.g, &currPix.b);
 
-/*			//bump up brightness
+			//bump up brightness
 			currPix.r = SatAdd8(currPix.r, BRIGHTNESS);
 			currPix.g = SatAdd8(currPix.g, BRIGHTNESS);
 			currPix.b = SatAdd8(currPix.b, BRIGHTNESS);
@@ -475,7 +581,7 @@ void FitFrame(char *bmp, PPUFrame *theFrame, int startline, int endline)
 			currPix.r = SatAdd8(contrastFactor * ((double)currPix.r - 128), 128);
 			currPix.g = SatAdd8(contrastFactor * ((double)currPix.g - 128), 128);
 			currPix.b = SatAdd8(contrastFactor * ((double)currPix.b - 128), 128);
-*/
+
 			// Ordered Dither
 			currPix.r = SatAdd8(currPix.r, map[x % 8][y % 8]);
 			currPix.g = SatAdd8(currPix.g, map[x % 8][y % 8]);
@@ -516,8 +622,8 @@ void FitFrame(char *bmp, PPUFrame *theFrame, int startline, int endline)
 				getpixel(bmp, x, y, &currPix.r, &currPix.g, &currPix.b);
 
 				// find closest color match from palette we chose
-				bestcol = FindBestColorMatchFromPalette(currPix, pmdata->Palettes[palToUse], BgColor); // Slow but dynamic palette
-				//bestcol = ColorLookup[currPix.r][currPix.g][currPix.b][palToUse]; // Quick but locked to one palette
+				//bestcol = FindBestColorMatchFromPalette(currPix, pmdata->Palettes[palToUse], BgColor); // Slow but dynamic palette
+				bestcol = ColorLookup[currPix.r][currPix.g][currPix.b][palToUse]; // Quick but locked to one palette
 
 				// Shift the index up one, so -1 becomes zero, which is how it will appear in the nes palette
 				bestcol++;
