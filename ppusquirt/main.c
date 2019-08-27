@@ -34,6 +34,7 @@ int readBuf = 0;
 // The out buffer to write to, for double buffering
 int writeBuf = 1;
 
+extern unsigned char indata[3];
 
 // Graphics Thread - converts one section of the screen to NES format
 void *gfxthread(void *threadid)
@@ -101,7 +102,7 @@ void *gfxthread(void *threadid)
 			{
 				lastTime = tv.tv_sec;
 
-				printf("%d\n", frameCount);
+				printf("FPS : %d   Ctrl : %d\n", frameCount, indata[0]);
 				frameCount = 0;
 			}
 		}

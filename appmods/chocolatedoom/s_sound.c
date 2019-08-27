@@ -679,7 +679,7 @@ void S_ChangeMusic(int musicnum, int looping)
     else nesnum = (musicnum % 7) + 2; // pick any music file
     printf("----Changin' music %d - %d ----\n", musicnum, nesnum);
 
-    sprintf(cmdline, "/root/PiPU/palmusswitcher/palmus %d 10 09 2d 07 28 18 02 01 11 06 16 3d", nesnum);
+    sprintf(cmdline, "/opt/PiPU/palmus %d 10 09 2d 07 28 18 02 01 11 06 16 3d", nesnum);
     system(cmdline);
 
     // The Doom IWAD file has two versions of the intro music: d_intro

@@ -63,13 +63,14 @@ void emit(int fd, int type, int code, int val)
 }
 
 int fd;
+unsigned char indata[3];
 
 // Thread that squirts data to the PPU (and recieves data back)
 void *Squirt(void *threadid)
 {
 
     int r = 1; // result
-    unsigned char indata[3];
+    
     int actual_length;
 
 

@@ -19,8 +19,8 @@ int BgColor = 0x0f;
 Color NesPalette[NESCOLORCOUNT];
 
 struct palmusdata *pmdata;
-double contrastFactor, contrast = 0;
-#define BRIGHTNESS 0
+double contrastFactor, contrast = 50;
+#define BRIGHTNESS 30
 Colmatch MostCommonColorInFrame[NESCOLORCOUNT];
 
 // Massive pre-calculated color lookup tables - Baseline FPS 82
@@ -312,17 +312,17 @@ void GFXSetup()
 	FILE *fp;
 	size_t n;
 
-	// build palette lookup tables to trade memory for speed
-	// Try to open them from last time if possible
-	if (fp = fopen("ntscpalette.pal", "r"))
+	// Load Palette from external file 
+	// disabled because it doesn't look as good as this internal one for some reason
+	/*if (fp = fopen("ntscpalette.pal", "r"))
 	{
 		if ((n = fread(&NesPalette, 1, 64*3, fp)) != (64*3)){ printf("exit : %lu\n", n); exit(1); }
 		fclose(fp);
-	}
+	}*/
 
 
 	// Generate NES palette from the string info
-	/*for (i = 0; i < 64; i++)
+	for (i = 0; i < 64; i++)
 	{
 		curCol = NesPaletteStrings[i];
 
@@ -337,7 +337,7 @@ void GFXSetup()
 		curHex[0] = curCol[4];
 		curHex[1] = curCol[5];
 		NesPalette[i].b = (unsigned char)strtoul(curHex, &dummy, 16);
-	}*/
+	}
 
 	// Generate ordered dither map
 	for (i = 0; i < 8; i++)
