@@ -79,14 +79,14 @@ C:\Cypress\USB\CY3684_EZ-USB_FX2LP_DVK\1.1\Windows Applications\Application Sour
 | Data 5                | 17           | PB5                  |
 | Data 6                | 18           | PB6                  |
 | Data 7                | 19           | PB7                  |
-  * - The write strobe isn't present on the Mask ROM pins, it should be connected directly between RDY1 and pin 56 on the cartridge connector.
+The write strobe isn't present on the Mask ROM pins, it should be connected directly between RDY1 and pin 56 on the cartridge connector.
 
-  Note that a number of FX2 boards I’ve ordered have had slightly wrong pin labelling - RDY0 and RDY1 were swapped. I would advise double-checking these pins are connected to the correct pins on the FX2 chip itself. RDY0 should be pin 8 and RDY1 should be pin 9.
+Note that a number of FX2 boards I’ve ordered have had slightly wrong pin labelling - RDY0 and RDY1 were swapped. I would advise double-checking these pins are connected to the correct pins on the FX2 chip itself. RDY0 should be pin 8 and RDY1 should be pin 9.
 
-Copy the operating system image to an SD card. You will need an SD card interface, either USB or built-in to your PC. You can use dd on Linux/MacOS or Etcher on Windows to transfer the image. The image is blah blah blah. 
+* **Copy the operating system image to an SD card.** You will need an SD card interface, either USB or built-in to your PC. You can use dd on Linux/MacOS or Etcher on Windows to transfer the image.
 
-Connect the Raspberry Pi to the power rails of the cart PCB. 
-Anywhere you can find power on the cartridge will be fine, I suggest tracing from the VCC/ground pins of the ICs and finding a suitable place. Now is a good time to test everything works together, ideally with a dismantled NES so you can watch the green activity light on the Raspberry Pi flashing.
+* **Connect the Raspberry Pi to the power rails of the cart PCB.** Anywhere you can find power on the cartridge will be fine, I suggest tracing from the VCC/ground pins of the ICs and finding a suitable place. 
 
-Assemble the cartridge
-Dremel out any internal supports from the cartridge enclosure that get in the way, and secure the Raspberry Pi and FX2 board with double-sided sticky foam pads. Then simply screw the cart together, swap the label for a more appropriate one, and you’re done!
+* **Test everything works together**, ideally with a dismantled NES so you can watch the green activity light on the Raspberry Pi flashing and/or connect a serial interface to the Pi to watch bootup messages.
+
+* **Assemble the cartridge** - Dremel out any internal supports from the cartridge enclosure that get in the way, and secure the Raspberry Pi and FX2 board with double-sided sticky foam pads. Then simply screw the cart together, swap the label for a more appropriate one, and you’re done!
