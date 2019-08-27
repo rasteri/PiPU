@@ -52,27 +52,25 @@ These are the instructions to build a PiPU cartridge. Consider watching the buil
 * **Test the ROM.** Put the board back in the cartridge and into a NES. If you’ve built the board correctly, the NES will start playing the DOOM intermission music. If not, check your connections.
 
 * **Program the FX2LP board with the custom firmware.** This is a bit of an arse to do if you’re not familiar with FX2 software, but the basic process is as follows : 
-
   * **Install the FX2LP development kit** - https://www.cypress.com/file/135301/download
+  * **Disable the FX2’s EEPROM.** Confusingly, depending on which FX2 board you have, this is accomplished by either connecting or disconnecting a jumper. You might need to try it both ways.
+  * **Connect the FX2 board to your computer** via USB. It will probably ask you to provide drivers, the default install location is “C:\Cypress\USB\CY3684_EZ-USB_FX2LP_DVK\1.1\Drivers” and then whichever subfolder of that is appropriate to your operating system (the Windows 8.1 driver works fine on Windows 10).
+  * **Start Cypress USB Control Center.** It can be found, by default, at 
+C:\Cypress\USB\CY3684_EZ-USB_FX2LP_DVK\1.1\Windows Applications\Application Source files\c_sharp\controlcenter\bin\Release\CyControl.exe. The FX2 device should be listed as “Cypress FX2LP No EEPROM Device”
+  * **Put it in firmware download mode.** Go to “Program->FX2->RAM” and select file “Vend_Ax.hex”. If all goes well, it will say “Programming Succeeded” at the bottom of the window.
+  * **Re-enable the FX2’s EEPROM.** Either connect or disconnect the EEPROM jumper, without disconnecting or resetting the FX2.
+  * **Download the firmware.** Go to “Program->FX2->64KB EEPROM” and select file “slave.iic”. Again, if all goes well, it will say “Programming Succeeded” at the bottom of the window.
+  * **Reboot the FX2** by disconnecting and reconnecting it, or by using the power or reset switches. It might prompt you to install drivers again, but when it finishes it should be listed in the USB Control Center as “EZ-USB FX2 GPIF to Ext FIFO Example using Single Transactions”. All good!
 
+* **Attach the FX2LP board to the Rasberry Pi’s USB connector.** There isn’t enough space for a cable, so I personally just hacked a MINI USB cable and soldered it directly to the underside of the Raspberry Pi’s USB port.
 
-Disable the FX2’s EEPROM. Confusingly, depending on which FX2 board you have, this is accomplished by either connecting or disconnecting a jumper. You might need to try it both ways.
-Connect the FX2 board to your computer via USB. It will probably ask you to provide drivers, the default install location is “C:\Cypress\USB\CY3684_EZ-USB_FX2LP_DVK\1.1\Drivers” and then whichever subfolder of that is appropriate to your operating system (the Windows 8.1 driver works fine on Windows 10).
-Start Cypress USB Control Center It can be found, by default, at 
-C:\Cypress\USB\CY3684_EZ-USB_FX2LP_DVK\1.1\Windows Applications\Application Source files\c_sharp\controlcenter\bin\Release\CyControl.exe. 
-The FX2 device should be listed as “Cypress FX2LP No EEPROM Device”
-Put it in firmware download mode. Go to “Program->FX2->RAM” and select file “Vend_Ax.hex”. If all goes well, it will say “Programming Succeeded” at the bottom of the window.
-Re-enable the FX2’s EEPROM. Either connect or disconnect the EEPROM jumper, without disconnecting or resetting the FX2.
-Download the firmware. Go to “Program->FX2->64KB EEPROM” and select file “slave.iic”. Again, if all goes well, it will say “Programming Succeeded” at the bottom of the window.
-Reboot the FX2 by disconnecting and reconnecting it, or by using the power or reset switches. It might prompt you to install drivers again, but when it finishes it should be listed in the USB Control Center as “EZ-USB FX2 GPIF to Ext FIFO Example using Single Transactions”. All good!
+* **Connect the FX2LP board to the NES Cartridge PCB.** This is the most involved step. You have to connect wires between the FX2’s headers and the pads on the cartridge that used to hold the CHR ROM. I would advise de-soldering the FX2’s headers first, then soldering wires directly into the pads. The connections to make are as follows : 
 
-Attach the FX2LP board to the Rasberry Pi’s USB connector
-There isn’t enough space for a cable, so I personally just hacked a MINI USB cable and soldered it to the underside of the Raspberry Pi’s USB port.
-
-Connect the FX2LP board to the NES Cartridge PCB
-This is the most involved step. You have to connect wires between the FX2’s headers and the pads on the cartridge that used to hold the CHR ROM. I would advise de-soldering the FX2’s headers first, then soldering wires directly into the pads.
-
-The connections to make are as follows : 
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
 
 Note that a number of FX2 boards I’ve ordered have had slightly wrong pin labelling - RDY0 and RDY1 were swapped. I would advise double-checking these pins are connected to the correct pins on the FX2 chip itself. RDY0 should be pin 8 and RDY1 should be pin 9.
 
