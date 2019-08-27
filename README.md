@@ -70,7 +70,7 @@ C:\Cypress\USB\CY3684_EZ-USB_FX2LP_DVK\1.1\Windows Applications\Application Sour
 | --------------------- | ------------ | -------------------- |
 | Ground                | 14           | GND, PA4             |
 | Read Strobe           | 22           | PA1, PA2, PA5, RDY0  |
-| Write Strobe          | N/A*        | RDY1                 |
+| Write Strobe          | N/A*         | RDY1                 |
 | Data 0                | 11           | PB0                  |
 | Data 1                | 12           | PB1                  |
 | Data 2                | 13           | PB2                  |
@@ -79,9 +79,9 @@ C:\Cypress\USB\CY3684_EZ-USB_FX2LP_DVK\1.1\Windows Applications\Application Sour
 | Data 5                | 17           | PB5                  |
 | Data 6                | 18           | PB6                  |
 | Data 7                | 19           | PB7                  |
+  * - The write strobe isn't present on the Mask ROM pins, it should be connected directly between RDY1 and pin 56 on the cartridge connector.
 
-
-Note that a number of FX2 boards I’ve ordered have had slightly wrong pin labelling - RDY0 and RDY1 were swapped. I would advise double-checking these pins are connected to the correct pins on the FX2 chip itself. RDY0 should be pin 8 and RDY1 should be pin 9.
+  Note that a number of FX2 boards I’ve ordered have had slightly wrong pin labelling - RDY0 and RDY1 were swapped. I would advise double-checking these pins are connected to the correct pins on the FX2 chip itself. RDY0 should be pin 8 and RDY1 should be pin 9.
 
 Copy the operating system image to an SD card. You will need an SD card interface, either USB or built-in to your PC. You can use dd on Linux/MacOS or Etcher on Windows to transfer the image. The image is blah blah blah. 
 
