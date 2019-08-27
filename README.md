@@ -66,11 +66,20 @@ C:\Cypress\USB\CY3684_EZ-USB_FX2LP_DVK\1.1\Windows Applications\Application Sour
 
 * **Connect the FX2LP board to the NES Cartridge PCB.** This is the most involved step. You have to connect wires between the FX2’s headers and the pads on the cartridge that used to hold the CHR ROM. I would advise de-soldering the FX2’s headers first, then soldering wires directly into the pads. The connections to make are as follows : 
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| NES CHR Memory Signal | Mask ROM pin | FX2LP pin(s)         |
+| --------------------- | ------------ | -------------------- |
+| Ground                | 14           | GND, PA4             |
+| Read Strobe           | 22           | PA1, PA2, PA5, RDY0  |
+| Write Strobe          | N/A*        | RDY1                 |
+| Data 0                | 11           | PB0                  |
+| Data 1                | 12           | PB1                  |
+| Data 2                | 13           | PB2                  |
+| Data 3                | 15           | PB3                  |
+| Data 4                | 16           | PB4                  |
+| Data 5                | 17           | PB5                  |
+| Data 6                | 18           | PB6                  |
+| Data 7                | 19           | PB7                  |
+
 
 Note that a number of FX2 boards I’ve ordered have had slightly wrong pin labelling - RDY0 and RDY1 were swapped. I would advise double-checking these pins are connected to the correct pins on the FX2 chip itself. RDY0 should be pin 8 and RDY1 should be pin 9.
 
