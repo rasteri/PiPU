@@ -22,8 +22,14 @@ PPU + Pi = PiPU.
 
 The NES itself runs a very simple game ROM which sets up the PPU, handles frame synchronization, sends controller input back to the Pi, and plays music when requested. All of this can be easily fit inside a standard NES cartridge enclosure, and runs on stock unmodified NESs.
 
+## Build Guide ##
+
+These are the instructions to build a PiPU cartridge. Consider watching the build video too, as visual guides are often helpful.
+
+
 ### Ingredients ###
-* **A donor or reproduction cartridge** - It needs to have pin 56 (PPU /WR), which many cartridges omit. I used a CNROM board (Major League Baseball). Specialist reproduction boards such as the Repro-X from gametech.us also exist.
+
+* **A donor or reproduction cartridge** - The only requirement for the cartridge is that it has all the neccesary pins (many carts omit the WRITE strobe pin). I used a CNROM cartridge (Major League Baseball), so if you want to be able to follow my guide exactly then get that - or use something like the Repro-X from gametech.us.
 * **Raspberry Pi 3A+** - A Raspberry Pi 3B in a smaller form factor, ideal for our purposes.
 * **SD Card** - At least 2GB in size, to store the Pi's operating system.
 * **FX2LP CY7C68013A USB Development Board** - Available very cheaply on eBay, these are often sold as "logic analyzer" boards.
@@ -33,28 +39,20 @@ The NES itself runs a very simple game ROM which sets up the PPU, handles frame 
 
 ### Method ###
 
-Grab the 0.1 release from here : https://github.com/rasteri/PiPU/releases/download/v0.1/PiPU-v0.1.zip
+* **Grab the 0.1 release** from here : https://github.com/rasteri/PiPU/releases/download/v0.1/PiPU-v0.1.zip
 
-Obtain a donor or repro cartridge. 
-The only requirement for the cartridge is that it has all the neccesary pins (many carts omit the WRITE strobe pin). I used a CNROM cartridge (Major League Baseball), so if you want to be able to follow my guide exactly then get that - or use something like the Repro-X from gametech.us.
+* **If using a donor cart, disassemble it and remove all the ICs from the PCB** (except the lockout chip). You’ll need a 3.8mm Gamebit screwdriver, and some sort of desoldering tool. Personally I just dremelled all the pins off the ICs then desoldered and removed each pin individually with tweezers.
 
-Disassemble it and remove all the ICs from the PCB (except the lockout chip). 
-You’ll need a 3.8mm Gamebit screwdriver, and some sort of desoldering tool. Personally I just dremelled all the pins off the ICs then desoldered and removed each pin individually with tweezers.
+* **Program an (E)EPROM with the PRG code.** I used a 28c256 EEPROM since I don’t really like UV-erasable ones, but feel free to use whatever you like if you know what you're doing. My programmer is a TL866, which is dirt cheap and works pretty well. Remember to pick the correct ROM file, there's one for NTSC and one for PAL.
 
-Program an (E)EPROM with the PRG code. 
-I used a 28c256 EEPROM since I don’t really like UV-erasable ones, but feel free to use whatever you like. My programmer is a TL866, which is dirt cheap and works pretty well.
+* **Modify the PCB to accept the ROM.** This step will vary depending on which board and ROM you pick, but instructions on how to modify a CNROM board for the 28C256 are available here. Otherwise, you can follow any NES reproduction guide on the internet, but be aware you only need to replace the PRG ROM, not the CHR.
 
-Modify the PCB to accept the ROM.
-This step will vary depending on which board and ROM you pick, but instructions on how to modify a CNROM board for the 28C256 are available here. Otherwise, you can follow any NES reproduction guide on the internet, but be aware you only need to replace the PRG ROM, not the CHR.
+* **Solder the PRG ROM to the board**
 
-Solder the PRG ROM to the board
+* **Test the ROM.** Put the board back in the cartridge and into a NES. If you’ve built the board correctly, the NES will start playing the DOOM intermission music. If not, check your connections.
 
-Test the ROM
-Put the board back in the cartridge and into a NES. If you’ve built the board correctly, the NES will start playing the DOOM intermission music. If not, check your connections.
-
-Program the FX2LP board with the custom firmware
-This is a bit of an arse to do if you’re not familiar with FX2 software, but the basic process is as follows : 
-Install the FX2LP development kit - https://www.cypress.com/file/135301/download
+* **Program the FX2LP board with the custom firmware.** This is a bit of an arse to do if you’re not familiar with FX2 software, but the basic process is as follows : 
+.* Install the FX2LP development kit - https://www.cypress.com/file/135301/download
 Disable the FX2’s EEPROM. Confusingly, depending on which FX2 board you have, this is accomplished by either connecting or disconnecting a jumper. You might need to try it both ways.
 Connect the FX2 board to your computer via USB. It will probably ask you to provide drivers, the default install location is “C:\Cypress\USB\CY3684_EZ-USB_FX2LP_DVK\1.1\Drivers” and then whichever subfolder of that is appropriate to your operating system (the Windows 8.1 driver works fine on Windows 10).
 Start Cypress USB Control Center It can be found, by default, at 
