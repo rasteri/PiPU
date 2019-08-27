@@ -53,7 +53,7 @@ These are the instructions to build a PiPU cartridge. Consider watching the buil
 
 * **Program the FX2LP board with the custom firmware.** This is a bit of an arse to do if you’re not familiar with FX2 software, but the basic process is as follows : 
 
-.* Install the FX2LP development kit - https://www.cypress.com/file/135301/download
+⋅⋅* **Install the FX2LP development kit** - https://www.cypress.com/file/135301/download
 
 
 Disable the FX2’s EEPROM. Confusingly, depending on which FX2 board you have, this is accomplished by either connecting or disconnecting a jumper. You might need to try it both ways.
