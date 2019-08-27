@@ -79,6 +79,7 @@ C:\Cypress\USB\CY3684_EZ-USB_FX2LP_DVK\1.1\Windows Applications\Application Sour
 | Data 5                | 17           | PB5                  |
 | Data 6                | 18           | PB6                  |
 | Data 7                | 19           | PB7                  |
+
 The write strobe isn't present on the Mask ROM pins, it should be connected directly between RDY1 and pin 56 on the cartridge connector.
 
 Note that a number of FX2 boards I’ve ordered have had slightly wrong pin labelling - RDY0 and RDY1 were swapped. I would advise double-checking these pins are connected to the correct pins on the FX2 chip itself. RDY0 should be pin 8 and RDY1 should be pin 9.
