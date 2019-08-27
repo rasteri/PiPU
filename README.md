@@ -1,5 +1,5 @@
 # PiPU
-# Raspberry as an NES graphics accelerator - 
+# Raspberry Pi as an NES graphics accelerator 
 
 This is a project to embed a Raspberry Pi in an NES cartridge to use as a graphics accelerator, similar to the SNES SuperFX chip or the Genesis SVP. It theoretically allows you to build a cartridge that can run any Pi game on an unmodified NES.
 
@@ -20,12 +20,18 @@ The project is based around the Raspberry Pi 3A+. It interfaces with the NES via
 
 PPU + Pi = PiPU.
 
-The NES itself runs a very simple game ROM which sets up the PPU, handles frame synchronization, sends controller input back to the Pi, and plays music when requested. All of this can be easily fit inside a standard NES cartridge enclosure, thanks to the Pi 3A+'s smaller size compared to other Pis.
+The NES itself runs a very simple game ROM which sets up the PPU, handles frame synchronization, sends controller input back to the Pi, and plays music when requested. All of this can be easily fit inside a standard NES cartridge enclosure, and runs on stock unmodified NESs.
+
+### Ingredients ###
+* **A donor or reproduction cartridge** - It needs to have pin 56 (PPU /WR), which many cartridges omit. I used a CNROM board (Major League Baseball). Specialist reproduction boards such as the Repro-X from gametech.us also exist.
+* **Raspberry Pi 3A+** - A Raspberry Pi 3B in a smaller form factor, ideal for our purposes.
+* **SD Card** - At least 2GB in size, to store the Pi's operating system.
+* **FX2LP CY7C68013A USB Development Board** - Available very cheaply on eBay, these are often sold as "logic analyzer" boards.
+* **EEPROM Programmer** - I used the TL866, again available very cheaply on eBay
+* **32K x 8bit Parallel (E)EPROM** - Such as the 28c256.
 
 
-
-
-
+### Method ###
 
 Grab the 0.1 release from here : https://github.com/rasteri/PiPU/releases/download/v0.1/PiPU-v0.1.zip
 
