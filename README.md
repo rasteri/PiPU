@@ -24,8 +24,7 @@ The NES itself runs a very simple game ROM which sets up the PPU, handles frame 
 
 ## Build Guide ##
 
-These are the instructions to build a PiPU cartridge. Consider watching the build video too, as visual guides are often helpful.
-
+These are the instructions to build a PiPU cartridge. I highly recommend using this guide in conjunction with the build video, as there are a few useful assembly hints there too.
 
 ### Ingredients ###
 
@@ -59,7 +58,7 @@ These are the instructions to build a PiPU cartridge. Consider watching the buil
 C:\Cypress\USB\CY3684_EZ-USB_FX2LP_DVK\1.1\Windows Applications\Application Source files\c_sharp\controlcenter\bin\Release\CyControl.exe. The FX2 device should be listed as “Cypress FX2LP No EEPROM Device”
   * **Put it in firmware download mode.** Go to “Program->FX2->RAM” and select file “Vend_Ax.hex”. If all goes well, it will say “Programming Succeeded” at the bottom of the window.
   * **Re-enable the FX2’s EEPROM.** Either connect or disconnect the EEPROM jumper, without disconnecting or resetting the FX2.
-  * **Download the firmware.** Go to “Program->FX2->64KB EEPROM” and select file “slave.iic”. Again, if all goes well, it will say “Programming Succeeded” at the bottom of the window.
+  * **Download the firmware.** Go to “Program->FX2->64KB EEPROM” and select file “slave.iic”. Again, if all goes well, it will say “Programming Succeeded” at the bottom of the window. If it fails, you probably got your jumper settings wrong, or you didn't manage to get it into firmware download mode properly.
   * **Reboot the FX2** by disconnecting and reconnecting it, or by using the power or reset switches. It might prompt you to install drivers again, but when it finishes it should be listed in the USB Control Center as “EZ-USB FX2 GPIF to Ext FIFO Example using Single Transactions”. All good!
 
 * **Attach the FX2LP board to the Rasberry Pi’s USB connector.** There isn’t enough space for a cable, so I personally just hacked a MINI USB cable and soldered it directly to the underside of the Raspberry Pi’s USB port.
@@ -80,14 +79,48 @@ C:\Cypress\USB\CY3684_EZ-USB_FX2LP_DVK\1.1\Windows Applications\Application Sour
 | Data 6                | 18              | PB6                  |
 | Data 7                | 19              | PB7                  |
 
-The write strobe isn't present on the Mask ROM pins, it should be connected directly between RDY1 and pin 56 on the cartridge connector.
+The write strobe/RDY1 isn't present on the Mask ROM pins, it should be connected directly to pin 56 on the cartridge connector.
 
 Note that a number of FX2 boards I’ve ordered have had slightly wrong pin labelling - RDY0 and RDY1 were swapped. I would advise double-checking these pins are connected to the correct pins on the FX2 chip itself. RDY0 should be pin 8 and RDY1 should be pin 9.
 
-* **Copy the operating system image to an SD card.** You will need an SD card interface, either USB or built-in to your PC. You can use dd on Linux/MacOS or Etcher on Windows to transfer the image.
+* **Copy the operating system image to an SD card.** You will need an SD card interface, either USB or built-in to your PC. You can use dd on Linux/MacOS or Etcher on Windows to transfer the image. You can optionally copy the WAD file(s) from the full version of DOOM and/or DOOM 2 to the root directory of the Fat32 partition of the SD card, and they will automatically be detected.
 
 * **Connect the Raspberry Pi to the power rails of the cart PCB.** Anywhere you can find power on the cartridge will be fine, I suggest tracing from the VCC/ground pins of the ICs and finding a suitable place. 
 
 * **Test everything works together**, ideally with a dismantled NES so you can watch the green activity light on the Raspberry Pi flashing and/or connect a serial interface to the Pi to watch bootup messages.
 
 * **Assemble the cartridge** - Dremel out any internal supports from the cartridge enclosure that get in the way, and secure the Raspberry Pi and FX2 board with double-sided sticky foam pads. Then simply screw the cart together, swap the label for a more appropriate one, and you’re done!
+
+
+## Usage ##
+
+Turn on the NES with the cartridge in, and the DOOM intermission music will start to play. After about 10 seconds, the game will start. If you have both DOOM and DOOM2 installed, DOOM will start first, then you can quit it to start DOOM 2.
+
+Controls are as follows : 
+
+| NES Control | DOOM function |
+| ----------- | ------------- |
+| D-Pad       | Movement      |
+| Button A    | Fire          |
+| Button B    | Use/Strafe    |
+| Select      | Change Weapon |
+| Start       | Main Menu     |
+
+
+## License ##
+
+Copyright (C) 2019 Andrew Tait <rasteri@gmail.com>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+version 2, as published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+General Public License version 2 for more details.
+
+You should have received a copy of the GNU General Public License
+version 2 along with this program; if not, write to the Free
+Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301, USA.
