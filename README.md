@@ -45,7 +45,7 @@ These are the instructions to build a PiPU cartridge. Consider watching the buil
 
 * **Program an (E)EPROM with the PRG code.** I used a 28c256 EEPROM since I don’t really like UV-erasable ones, but feel free to use whatever you like if you know what you're doing. My programmer is a TL866, which is dirt cheap and works pretty well. Remember to pick the correct ROM file, there's one for NTSC and one for PAL.
 
-* **Modify the PCB to accept the ROM.** This step will vary depending on which board and ROM you pick, but instructions on how to modify a CNROM board for the 28C256 are available here. Otherwise, you can follow any NES reproduction guide on the internet, but be aware you only need to replace the PRG ROM, not the CHR.
+* **Modify the PCB to accept the ROM.** This step will vary depending on which board and ROM you pick, but instructions on how to modify a CNROM board for the 28C256 [are available here](https://raw.githubusercontent.com/rasteri/PiPU/master/cartmods.jpg). Otherwise, you can follow any NES reproduction guide on the internet, but be aware you only need to replace the PRG ROM, not the CHR.
 
 * **Solder the PRG ROM to the board**
 
