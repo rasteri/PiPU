@@ -52,7 +52,10 @@ These are the instructions to build a PiPU cartridge. Consider watching the buil
 * **Test the ROM.** Put the board back in the cartridge and into a NES. If you’ve built the board correctly, the NES will start playing the DOOM intermission music. If not, check your connections.
 
 * **Program the FX2LP board with the custom firmware.** This is a bit of an arse to do if you’re not familiar with FX2 software, but the basic process is as follows : 
+
 .* Install the FX2LP development kit - https://www.cypress.com/file/135301/download
+
+
 Disable the FX2’s EEPROM. Confusingly, depending on which FX2 board you have, this is accomplished by either connecting or disconnecting a jumper. You might need to try it both ways.
 Connect the FX2 board to your computer via USB. It will probably ask you to provide drivers, the default install location is “C:\Cypress\USB\CY3684_EZ-USB_FX2LP_DVK\1.1\Drivers” and then whichever subfolder of that is appropriate to your operating system (the Windows 8.1 driver works fine on Windows 10).
 Start Cypress USB Control Center It can be found, by default, at 
