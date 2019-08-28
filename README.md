@@ -69,7 +69,7 @@ C:\Cypress\USB\CY3684_EZ-USB_FX2LP_DVK\1.1\Windows Applications\Application Sour
 | --------------------- | --------------- | -------------------- |
 | Ground                | 14              | GND, PA4             |
 | Read Strobe           | 22              | PA1, PA2, PA5, RDY0  |
-| Write Strobe          | Cartridge Pin56 | RDY1                 |
+| Write Strobe          | Cartridge 56    | RDY1                 |
 | Data 0                | 11              | PB0                  |
 | Data 1                | 12              | PB1                  |
 | Data 2                | 13              | PB2                  |
