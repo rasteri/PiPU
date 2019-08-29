@@ -5,6 +5,8 @@ This is a project to embed a Raspberry Pi in an NES cartridge to use as a graphi
 
 For now the only supported game is DOOM, but I'm sure more games will come.
 
+Here's a brief overview - https://www.youtube.com/watch?v=FzVN9kIUNxw
+
 The folders are as follows : 
 * **Appmods** - patches for SDL2 and Chocolate Doom to interface them with the NES/
 * **Fx2firmware** - source code for the FX2 firmware. This handles all the comms between the Pi and the NES.
@@ -24,7 +26,7 @@ The NES itself runs a very simple game ROM which sets up the PPU, handles frame 
 
 ## Build Guide ##
 
-These are the instructions to build a PiPU cartridge. I highly recommend using this guide in conjunction with the build video, as there are a few useful assembly hints there too.
+These are the instructions to build a PiPU cartridge. I highly recommend using this guide in conjunction with the build video, as there are a few useful assembly hints there too - https://www.youtube.com/watch?v=gCWhWBtu0LA
 
 ### Ingredients ###
 
